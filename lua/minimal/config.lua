@@ -1,25 +1,20 @@
-local config
+local M = {}
 
-vim = vim or { g = {}, o = {} }
-
-local function opt(key, default)
-  key = "minimal_" .. key
-  if vim.g[key] == nil then
-    return default
-  end
-  if vim.g[key] == 0 then
-    return false
-  end
-  return vim.g[key]
-end
-
-config = {
-  transparent_background = opt('transparent_background', false),
-  italic_comments = opt('italic_comments', true) and 'italic' or 'NONE',
-  italic_keywords = opt('italic_keywords', false) and 'italic' or 'NONE',
-  italic_functions = opt('italic_functions', false) and 'italic' or 'NONE',
-  italic_booleans = opt('italic_booleans', false) and 'italic' or 'NONE',
-  italic_variables = opt('italic_variables', false) and 'italic' or 'NONE',
+---Configuration default values and schema.
+M.default_config = {
+    -- NOTE Prefer options in sub-tables because vim.deepcopy() copies inner tables as
+    -- unique references, which is much better for passing around unique tables.
+    italic = {
+        comments = true,
+        keywords = false,
+        functions = false,
+        booleans = false,
+        variables = false,
+    },
 }
 
-return config
+M.config = vim.deepcopy(M.default_config, false)
+
+vim.g.minimal_colorscheme = M.config
+
+return M
