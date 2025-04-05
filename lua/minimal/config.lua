@@ -11,6 +11,9 @@ M.default_config = {
         booleans = false,
         variables = false,
     },
+    transparent = {
+        background = false,
+    }
 }
 
 M.config = vim.deepcopy(M.default_config, false)
