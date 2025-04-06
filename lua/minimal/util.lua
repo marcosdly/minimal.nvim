@@ -11,4 +11,10 @@ function M.load_theme_table(theme)
     end
 end
 
+function M.link(group)
+    return { link = group }
+end
+
+M.is_win32 = vim.uv.os_uname().sysname == "Windows_NT"
+
 return M
