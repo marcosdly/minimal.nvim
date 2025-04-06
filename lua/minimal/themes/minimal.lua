@@ -46,7 +46,7 @@ M.colors = {
 }
 
 local c = M.colors
-local cfg = require("minimal.config").config
+local cfg = vim.g.minimal_colorscheme
 local none = "NONE"
 
 M.highlight_groups = {
