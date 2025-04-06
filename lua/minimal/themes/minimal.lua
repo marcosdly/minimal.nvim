@@ -1,4 +1,3 @@
-
 local M = {}
 
 M.colors = {
@@ -47,185 +46,201 @@ M.colors = {
 }
 
 local c = M.colors
-local cfg = require'minimal.config'.config
-local none = 'NONE'
+local cfg = require("minimal.config").config
+local none = "NONE"
 
 M.highlight_groups = {
-    styles = {
-        Bold = { bold = true },
-        Italic = { italic = true },
-        Underlined = { underline = true },
-    },
-
-    editor_settings = {
-        Character = { fg = c.yellow },
+    ---Core highlight groups
+    ---SEE :h syntax
+    nvim_core = {
         ColorColumn = { bg = c.black1 },
-        Comment = { fg = c.comment, italic = cfg.italic.comments },
         Conceal = { fg = c.fg }, -- {bg = config.transparent_background and 'NONE' or colors.bg },
-        Conditional = { fg = c.red_key_w },
-        Constant = { fg = c.pink },
+        --TODO CurSearch
         Cursor = { fg = c.yellow, bg = c.bg },
-        CursorColumn = { fg = none, bg = none },
+        lCursor = { fg = c.cursor_fg, bg = c.cursor_bg },
         -- CursorIM = { fg = colors.cursor_fg, bg = colors.cursor_bg },
+        CursorColumn = { fg = none, bg = none },
         CursorLine = { bg = c.black1 },
-        CursorLineNr = { fg = c.white, bg = c.gutter_bg, bold = true },
-
-        Boolean = { fg = c.orange, italic = cfg.italic.booleans },
-        Debug = { fg = c.fg },
-        Define = { fg = c.blue_type },
-        Delimiter = { fg = c.gray_punc },
-        DiffAdd = { fg = c.green_func },
-        DiffAdded = { fg = c.green_func },
-        DiffChange = { fg = c.green_func },
-        DiffDelete = { fg = c.red_key_w },
-        DiffRemoved = { fg = c.red_key_w },
-        DiffText = { fg = c.white1 },
-        DiffFile = { fg = c.pink },
-        -- DiffIndexLine     = { fg = colors.gray3 },
-
+        Directory = { fg = c.white },
         -- EndOfBuffer = { fg = colors.bg },
-        Error = { fg = c.red_key_w, bg = c.bg, bold = true},
-        ErrorMsg = { fg = c.gray, bg = c.red_err, bold = true},
-        Exception = { fg = c.white },
-
-        Float = { fg = c.orange },
-        FloatBorder = { fg = c.gray2, bg = none},
-        FoldColumn = { fg = c.line_fg },
+        TermCursor = { fg = c.cursor_fg, bg = c.cursor_bg },
+        TermCursorNC = { fg = c.cursor_fg, bg = c.cursor_bg },
+        ErrorMsg = { fg = c.gray, bg = c.red_err, bold = true },
+        --TODO WinSeparator
         Folded = { fg = c.white, bg = c.gray },
-        Function = { fg = c.green_func },
-
-        Identifier = { fg = c.white1 },
-        Ignore = { fg = c.gray_punc },
+        FoldColumn = { fg = c.line_fg },
+        SignColumn = { bg = c.line_bg },
         IncSearch = { fg = c.bg, bg = c.orange },
-        Include = { fg = c.blue_type, italic = cfg.italic.keywords },
-
-        Keyword = { fg = c.red_key_w, italic = cfg.italic.keywords },
-
-        Label = { fg = c.red_key_w },
+        Substitute = { fg = c.gray2, bg = c.orange },
         LineNr = { fg = c.line_fg, bg = c.line_bg },
-
-        Macro = { fg = c.red_key_w, italic = cfg.italic.keywords },
+        --TODO LineNrAbove
+        --TODO LineNrBelow
+        CursorLineNr = { fg = c.white, bg = c.gutter_bg, bold = true },
+        --TODO CursorLineFold
+        --TODO CursorLineSign
         MatchParen = { fg = c.white1, bg = c.black },
-        MatchParenCur = { underline=true },
-        MatchWord = { underline=true },
-        MatchWordCur = { underline=true },
         ModeMsg = { fg = c.fg, bg = c.bg },
-        MoreMsg = { fg = c.orange_wr },
         MsgArea = { fg = c.fg, bg = cfg.transparent.background and none or c.bg },
         MsgSeparator = { fg = c.fg, bg = c.bg },
-
+        MoreMsg = { fg = c.orange_wr },
         NonText = { fg = c.gray2 },
         Normal = { fg = c.fg, bg = cfg.transparent.background and none or c.bg },
         NormalFloat = { bg = c.dark },
         NormalNC = { fg = c.white, bg = cfg.transparent.background and none or c.bg },
-        Number = { fg = c.orange },
-
-        Operator = { fg = c.white },
         Pmenu = { fg = c.white1, bg = c.black },
-        PmenuSbar = { bg = c.gray },
         PmenuSel = { fg = c.line_fg, bg = c.black },
+        --TODO PmenuSel
+        --TODO PmenuKind
+        --TODO PmenuKindSel
+        --TODO PmenuExtra
+        --TODO PmenuExtraSel
+        PmenuSbar = { bg = c.gray },
         PmenuThumb = { bg = c.black },
-        PreCondit = { fg = c.blue_type },
-        PreProc = { fg = c.blue_type },
-
         Question = { fg = c.green_func },
         QuickFixLine = { fg = c.orange_wr },
-
-        Repeat = { fg = c.red_key_w },
-
         Search = { fg = c.line_fg, bg = c.orange },
-        SignColumn = { bg = c.line_bg },
-        Special = { fg = c.gray_punc },
-        SpecialChar = { fg = c.yellow },
-        SpecialComment = { fg = c.pink },
-        SpecialKey = { fg = c.gray_punc, bold=true },
-        SpellBad = { fg = c.red_key_w, underline=true },
-        SpellCap = { fg = c.orange, underline=true },
-        SpellLocal = { fg = c.green, underline=true },
-        SpellRare = { fg = c.pink, underline=true },
-        Statement = { fg = c.red_key_w },
+        --TODO SnippetTabstop
+        SpecialKey = { fg = c.gray_punc, bold = true },
+        SpellBad = { fg = c.red_key_w, underline = true },
+        SpellCap = { fg = c.orange, underline = true },
+        SpellLocal = { fg = c.green, underline = true },
+        SpellRare = { fg = c.pink, underline = true },
         StatusLine = { fg = c.line_fg, bg = c.black },
         StatusLineNC = { fg = c.line_fg, bg = c.black },
-        StatusLineSeparator = { fg = c.dark },
-        StatusLineTerm = { fg = c.green_func, bg = c.black },
-        StatusLineTermNC = { fg = c.gray_punc, bg = c.black },
-        StorageClass = { fg = c.red_key_w },
-        String = { fg = c.yellow },
-        Structure = { fg = c.green_func },
-        Substitute = { fg = c.gray2, bg = c.orange },
-
         TabLine = { fg = c.line_fg },
         TabLineFill = { fg = c.line_fg },
         TabLineSel = { fg = c.fg },
-        Tag = { fg = c.gray_punc },
-        TermCursor = { fg = c.cursor_fg, bg = c.cursor_bg },
-        TermCursorNC = { fg = c.cursor_fg, bg = c.cursor_bg },
         Title = { fg = c.gray_punc },
-        Todo = { fg = c.yellow, bold=true },
-        Type = { fg = c.blue_type, italic = cfg.italic.keywords },
-        Typedef = { fg = c.blue_type, italic = cfg.italic.keywords },
-
-        Variable = { fg = c.white },
-        VertSplit = { fg = c.vsplit_bg },
-        Visual = { fg = none, bg = c.visual_select_bg, bold=true },
+        Visual = { fg = none, bg = c.visual_select_bg, bold = true },
         VisualNOS = { fg = c.selection_fg, bg = c.selection_bg },
-
         WarningMsg = { fg = c.orange_wr, bg = c.none },
         Whitespace = { fg = c.non_text },
         WildMenu = { fg = c.fg },
-        lCursor = { fg = c.cursor_fg, bg = c.cursor_bg },
-
-        -- Markdown
-        markdownBold = { fg = c.white, bold=true },
-        markdownCode = { fg = c.orange },
-        markdownCodeBlock = { fg = c.orange },
-        markdownUrl = { fg = c.pink, underline=true },
-        markdownCodeError = { fg = c.red_err },
-        markdownH1 = { fg = c.white },
-        markdownH2 = { fg = c.white },
-        markdownH3 = { fg = c.white },
-        markdownH4 = { fg = c.white },
-        markdownH5 = { fg = c.white },
-        markdownH6 = { fg = c.white },
-        markdownId = { fg = c.pink },
-        markdownItalic = { fg = c.white, italic=true },
-        markdownLinkText = { fg = c.white },
-        markdownRule = { fg = c.accent },
-        markdownListMarker = { fg = c.red_key_w },
-        markdownHeadingDelimiter = { fg = c.white },
-        markdownHeadingRule = { fg = c.accent },
-        markdownUrlTitleDelimiter = { fg = c.white },
-        markdownCodeSpecial = { fg = c.orange },
-        markdownCodeDelimiter = { fg = c.green },
-        markdownBlockquote = { fg = c.accent },
-        markdownIdDeclaration = { fg = c.white },
-        markdownIdDelimiter = { fg = c.gray2 },
-        markdownLinkDelimiter = { fg = c.gray2 },
-        markdownOrderedListMarker = { fg = c.red_key_w },
+        --TODO WinBar
+        --TODO WinBarNC
+        --TODO Menu
+        --TODO Scrollbar
+        --TODO Tooltip
+        -- FloatBorder = { fg = c.gray2, bg = none },
+        --TODO FloatTitle
+        --TODO FloatFooter
     },
 
-    plugin_buffer = {
+    nvim_diff = {
+        DiffAdd = { fg = c.green_func },
+        DiffChange = { fg = c.green_func },
+        DiffDelete = { fg = c.red_key_w },
+        DiffText = { fg = c.white1 },
+        DiffTextAdd = { fg = c.white1 },
+        Added = { fg = c.green_func },
+        Removed = { fg = c.red_key_w },
+        File = { fg = c.pink },
+    },
+
+    ---Builtin groups that highlight expressions in specific scenarios.
+    ---Is used by many syntax files and plugins that as links.
+    ---SEE :h group-name
+    ---SEE :h expr-highlight
+    nvim_general_syntax = {
+        Comment = { fg = c.comment, italic = cfg.italic.comments },
+
+        Constant = { fg = c.pink },
+        String = { fg = c.yellow },
+        Character = { fg = c.yellow },
+        Number = { fg = c.orange },
+        Boolean = { fg = c.orange, italic = cfg.italic.booleans },
+        Float = { fg = c.orange },
+
+        Identifier = { fg = c.white1 },
+        Function = { fg = c.green_func },
+
+        Statement = { fg = c.red_key_w },
+        Conditional = { fg = c.red_key_w },
+        Repeat = { fg = c.red_key_w },
+        Label = { fg = c.red_key_w },
+        Operator = { fg = c.white },
+        Keyword = { fg = c.red_key_w, italic = cfg.italic.keywords },
+        Exception = { fg = c.white },
+
+        PreProc = { fg = c.blue_type },
+        Include = { fg = c.blue_type, italic = cfg.italic.keywords },
+        Define = { fg = c.blue_type },
+        Macro = { fg = c.red_key_w, italic = cfg.italic.keywords },
+        PreCondit = { fg = c.blue_type },
+
+        Type = { fg = c.blue_type, italic = cfg.italic.keywords },
+        StorageClass = { fg = c.red_key_w },
+        Structure = { fg = c.green_func },
+        Typedef = { fg = c.blue_type, italic = cfg.italic.keywords },
+
+        Special = { fg = c.gray_punc },
+        SpecialChar = { fg = c.yellow },
+        Tag = { fg = c.gray_punc },
+        Delimiter = { fg = c.gray_punc },
+        SpecialComment = { fg = c.pink },
+        Debug = { fg = c.fg },
+
+        Underlined = { underline = true },
+
+        Ignore = { fg = c.gray_punc },
+
+        Error = { fg = c.red_key_w, bg = c.bg, bold = true },
+
+        Todo = { fg = c.yellow, bold = true },
+    },
+
+    nvim_terminal_emulator = {
+        debugBreakpoint = { fg = c.red_key_w, reverse = true },
+        debugPc = { bg = c.white1 },
+    },
+
+    nvim_diagnostic = {
+        DiagnosticVirtualTextInfo = { fg = c.yellow },
+        DiagnosticHint = { fg = c.blue_type },
+        DiagnosticError = { fg = c.red_err },
+        DiagnosticInfo = { fg = c.yellow },
+        DiagnosticVirtualTextWarn = { fg = c.orange_wr },
+        DiagnosticWarn = { fg = c.orange_wr },
+
+        DiagnosticFloatingError = { fg = c.red_err },
+        DiagnosticFloatingHint = { fg = c.blue_type },
+        DiagnosticFloatingInfo = { fg = c.yellow },
+        DiagnosticFloatingWarn = { fg = c.orange_wr },
+
+        DiagnosticSignError = { fg = c.red_err, bg = c.line_bg },
+        DiagnosticSignHint = { fg = c.blue_type, bg = c.line_bg },
+        DiagnosticSignInfo = { fg = c.yellow, bg = c.line_bg },
+        DiagnosticSignWarn = { fg = c.orange_wr, bg = c.line_bg },
+
+        DiagnosticUnderlineError = { underline = true },
+        DiagnosticUnderlineHint = { underline = true },
+        DiagnosticUnderlineInfo = { underline = true },
+        DiagnosticUnderlineWarn = { underline = true },
+
+        DiagnosticVirtualTextError = { fg = c.red_err },
+        DiagnosticVirtualTextHint = { fg = c.gray2 },
+    },
+
+    ["romgrk/barbar.nvim"] = {
         BufferCurrent = { fg = c.fg, bg = c.gray },
         BufferCurrentIndex = { fg = c.fg, bg = c.bg },
         BufferCurrentMod = { fg = c.yellow, bg = c.bg },
         BufferCurrentSign = { fg = c.blue_type, bg = c.bg },
-        BufferCurrentTarget = { fg = c.red_key_w, bg = c.bg, bold=true },
+        BufferCurrentTarget = { fg = c.red_key_w, bg = c.bg, bold = true },
         BufferInactive = { fg = c.gray2, bg = c.dark },
         BufferInactiveIndex = { fg = c.gray2, bg = c.dark },
         BufferInactiveMod = { fg = c.yellow, bg = c.dark },
         BufferInactiveSign = { fg = c.gray2, bg = c.dark },
-        BufferInactiveTarget = { fg = c.red_key_w, bg = c.dark, bold=true },
+        BufferInactiveTarget = { fg = c.red_key_w, bg = c.dark, bold = true },
         BufferVisible = { fg = c.fg, bg = c.bg },
         BufferVisibleIndex = { fg = c.fg, bg = c.bg },
         BufferVisibleMod = { fg = c.yellow, bg = c.bg },
         BufferVisibleSign = { fg = c.green, bg = c.bg },
-        BufferVisibleTarget = { fg = c.red_key_w, bg = c.bg, bold=true },
-        BufferLineFill = { fg = c.fg, bg = c.gray, bold=true },
+        BufferVisibleTarget = { fg = c.red_key_w, bg = c.bg, bold = true },
+        BufferLineFill = { fg = c.fg, bg = c.gray, bold = true },
     },
 
-    ---Plugin: [which-key.nvim](https://github.com/folke/which-key.nvim)
-    plugin_whichkey = {
-
+    ["folke/which-key.nvim"] = {
         WhichKey = { fg = c.blue_type },
         WhichKeySeperator = { fg = c.red_key_w },
         WhichKeyGroup = { fg = c.pink },
@@ -233,8 +248,7 @@ M.highlight_groups = {
         WhichKeyFloat = { bg = c.dark },
     },
 
-    ---Plugin: [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
-    plugin_cmp = {
+    ["hrsh7th/nvim-cmp"] = {
         CmpItemAbbrDeprecated = { fg = c.comment },
         CmpDocumentation = { fg = c.fg },
         CmpDocumentationBorder = { fg = c.gray2 },
@@ -257,23 +271,13 @@ M.highlight_groups = {
         CmpItemKindOperator = { fg = c.red_key_w },
     },
 
-    ---Plugin: [dashboard-nvim](https://github.com/glepnir/dashboard-nvim)
-    plugin_dashboard = {
-
+    ["glepnir/dashboard-nvim"] = {
         DashboardCenter = { fg = c.white },
         DashboardFooter = { fg = c.yellow },
         DashboardHeader = { fg = c.green_func },
     },
 
-    debug = {
-
-        debugBreakpoint = { fg = c.red_key_w, reverse=true },
-        debugPc = { bg = c.white1 },
-    },
-
-    ---Plugin: [diffview.nvim](https://github.com/sindrets/diffview.nvim)
-    plugin_diffview = {
-
+    ["sindrets/diffview.nvim"] = {
         DiffViewNormal = { fg = c.gray2, bg = c.dark },
         DiffviewFilePanelDeletion = { fg = c.red_err },
         DiffviewFilePanelInsertion = { fg = c.diff_add },
@@ -284,64 +288,26 @@ M.highlight_groups = {
         DiffviewVertSplit = { bg = c.bg },
     },
 
-    ---Plugin: [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
-    plugin_gitsigns = {
-
+    ["lewis6991/gitsigns.nvim"] = {
         GitSignsAdd = { fg = c.green_func, bg = c.line_bg },
         GitSignsChange = { fg = c.diff_change, bg = c.line_bg },
         GitSignsDelete = { fg = c.red_key_w, bg = c.line_bg },
     },
 
-    ---Plugin: [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-    plugin_gitgutter = {
-
+    ["airblade/vim-gitgutter"] = {
         GitGutterAdd = { fg = c.diff_add },
         GitGutterChange = { fg = c.diff_change },
         GitGutterDelete = { fg = c.red_err },
     },
 
-    ---Plugin: [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
-    plugin_indent_blankline = {
-
+    ["lukas-reineke/indent-blankline.nvim"] = {
         IndentBlanklineChar = { fg = c.black1 },
         IndentBlanklineContextChar = { fg = c.gray2 },
         IndentBlanklineSpaceChar = { fg = c.white1 },
         IndentBlanklineSpaceCharBlankline = { fg = c.yellow },
     },
 
-    ---Plugin: [lsp](https://neovim.io/doc/user/lsp.html)
-    plugin_lsp = {
-
-        DiagnosticVirtualTextInfo = { fg = c.yellow },
-        DiagnosticHint = { fg = c.blue_type },
-        DiagnosticError = { fg = c.red_err },
-        DiagnosticInfo = { fg = c.yellow },
-        DiagnosticVirtualTextWarn = { fg = c.orange_wr },
-        DiagnosticWarn = { fg = c.orange_wr },
-
-        DiagnosticFloatingError = { fg = c.red_err },
-        DiagnosticFloatingHint = { fg = c.blue_type },
-        DiagnosticFloatingInfo = { fg = c.yellow },
-        DiagnosticFloatingWarn = { fg = c.orange_wr },
-
-        DiagnosticSignError = { fg = c.red_err, bg = c.line_bg },
-        DiagnosticSignHint = { fg = c.blue_type, bg = c.line_bg },
-        DiagnosticSignInfo = { fg = c.yellow, bg = c.line_bg },
-        DiagnosticSignWarn = { fg = c.orange_wr, bg = c.line_bg },
-
-        DiagnosticUnderlineError = { underline=true },
-        DiagnosticUnderlineHint = { underline=true },
-        DiagnosticUnderlineInfo = { underline=true },
-        DiagnosticUnderlineWarn = { underline=true },
-
-        DiagnosticVirtualTextError = { fg = c.red_err },
-        DiagnosticVirtualTextHint = { fg = c.gray2 },
-    },
-
-    ---Plugin: [nerdtree](https://github.com/preservim/nerdtree)
-    plugin_nerdtree = {
-
-        Directory = { fg = c.white },
+    ["preservim/nerdtree"] = {
         NERDTreeUp = { fg = c.yellow },
         NERDTreeDir = { fg = c.blue_type },
         NERDTreeOpenable = { fg = c.comment },
@@ -371,9 +337,7 @@ M.highlight_groups = {
         NERDTreeCurrentNode = { fg = c.comment },
     },
 
-    ---Plugin: [vim-startify](https://github.com/mhinz/vim-startify)
-    plugin_startify = {
-
+    ["mhinz/vim-startify"] = {
         StartifyEndOfBuffer = { fg = c.non_text },
         StartifyNumber = { fg = c.red_key_w },
         StartifySelect = { fg = c.comment },
@@ -388,64 +352,16 @@ M.highlight_groups = {
         StartifySection = { fg = c.pink },
     },
 
-    --   LspDiagnostics:
-    plugin_lspdiagnostics = {
-
-        LspDiagnosticsDefaultHint = { fg = c.blue_type }, -- Deprecated
-        LspDiagnosticsError = { fg = c.red_err }, -- Deprecated
-        LspDiagnosticsFloatingError = { fg = c.red_err }, -- Deprecated
-        LspDiagnosticsFloatingHint = { fg = c.blue_type }, -- Deprecated
-        LspDiagnosticsFloatingInformation = { fg = c.yellow }, -- Deprecated
-        LspDiagnosticsFloatingWarning = { fg = c.orange_wr }, -- Deprecated
-        LspDiagnosticsHint = { fg = c.blue_type }, -- Deprecated
-        LspDiagnosticsInformation = { fg = c.yellow }, -- Deprecated
-        LspDiagnosticsSignHint = { fg = c.blue_type }, -- Deprecated
-        LspDiagnosticsSignInformation = { fg = c.yellow }, -- Deprecated
-        LspDiagnosticsSignWarning = { fg = c.orange_wr }, -- Deprecated
-        LspDiagnosticsUnderlineError = { underline=true }, -- Deprecated
-        LspDiagnosticsUnderlineHint = { underline=true }, -- Deprecated
-        LspDiagnosticsUnderlineWarning = { underline=true }, -- Deprecated
-        LspDiagnosticsVirtualTextWarning = { fg = c.orange_wr }, -- Deprecated
-        LspDiagnosticsWarning = { fg = c.orange_wr }, -- Deprecated
-        LspReferenceRead = { bg = c.fg_gutter, bold=true }, -- Deprecated
-        LspReferenceText = { bg = c.fg_gutter, bold=true }, -- Deprecated
-        LspReferenceWrite = { bg = c.fg_gutter, bold=true }, -- Deprecated
-        LspDiagnosticsDefaultError = { fg = c.red_err }, -- Deprecated
-        LspDiagnosticsSignError = { fg = c.red_err }, -- Deprecated
-        LspDiagnosticsDefaultWarning = { fg = c.yellow }, -- Deprecated
-        LspDiagnosticsDefaultInformation = { fg = c.yellow }, -- Deprecated
-        LspDiagnosticsVirtualTextHint = { fg = c.gray2 }, -- Deprecated
-        LspDiagnosticsVirtualTextInformation = { fg = c.yellow }, -- Deprecated
-        LspDiagnosticsUnderlineInformation = { underline=true }, -- Deprecated
-    },
-
-    ---Plugin: [vim-indent-guides](https://github.com/nathanaelkane/vim-indent-guides)
-    plugin_vim_indent_guides = {
-
+    ["nathanaelkane/vim-indent-guides"] = {
         IndentGuidesEven = { fg = c.white1 },
         IndentGuidesOdd = { fg = c.comment },
     },
 
-    ---Plugin: [flutter-tools.nvim](https://github.com/akinsho/flutter-tools.nvim)
-    plugin_flutter_tools = {
-
+    ["akinsho/flutter-tools.nvim"] = {
         FlutterWidgetGuides = { fg = c.gray2 },
     },
 
-    plugin_python = {
-
-        pythonConditional = { fg = c.red_key_w },
-        pythonException = { fg = c.pink },
-        pythonFunction = { fg = c.green_func },
-        pythonInclude = { fg = c.red_key_w },
-        pythonOperator = { fg = c.red_key_w },
-        pythonStatement = { fg = c.white },
-        pythonBoolean = { fg = c.white },
-    },
-
-    ---Plugin: [neogit](https://github.com/TimUntersberger/neogit)
-    plugin_neogit = {
-
+    ["TimUntersberger/neogit"] = {
         NeogitBranch = { fg = c.pink },
         NeogitRemote = { fg = c.pink },
         NeogitHunkHeader = { fg = c.accent, bg = c.dark },
@@ -459,11 +375,9 @@ M.highlight_groups = {
         NeogitDiffDeleteHighlight = { fg = c.red_err, bg = c.dark },
     },
 
-    ---Plugin: [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
-    plugin_nvimtree = {
-
+    ["kyazdani42/nvim-tree.lua"] = {
         -- NvimTreeFolderIcon = { fg = c.orange },
-        NvimTreeEmptyFolderName = { fg = c.yellow, italic=true },
+        NvimTreeEmptyFolderName = { fg = c.yellow, italic = true },
         NvimTreeCursorLine = { fg = c.line_fg, bg = c.black1 },
         NvimTreeExecFile = { fg = c.green },
         NvimTreeFolderIcon = { fg = c.comment },
@@ -478,17 +392,15 @@ M.highlight_groups = {
         NvimTreeIndentMarker = { fg = c.comment },
         NvimTreeNormal = { fg = c.white1, bg = c.black },
         NvimTreeNormalNC = { bg = c.black },
-        NvimTreeOpenedFolderName = { fg = c.white1, italic=true },
-        NvimTreeRootFolder = { fg = c.yellow, bold=true },
+        NvimTreeOpenedFolderName = { fg = c.white1, italic = true },
+        NvimTreeRootFolder = { fg = c.yellow, bold = true },
         NvimTreeSpecialFile = { fg = c.orange },
         NvimTreeSymlink = { fg = c.yellow },
         NvimTreeVertSplit = { fg = c.black },
         NvimTreeEndOfBuffer = { fg = c.non_text },
     },
 
-    ---Plugin: [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
-    plugin_telescope = {
-
+    ["nvim-telescope/telescope.nvim"] = {
         TelescopeBorder = {
             fg = c.white,
             bg = cfg.transparent_background and none or c.bg,
@@ -498,9 +410,7 @@ M.highlight_groups = {
         TelescopeSelection = { fg = c.comment, bg = c.black1 },
     },
 
-    ---Plugin: [telescope.nvim](https://github.com/folke/trouble.nvim)
-    plugin_trouble = {
-
+    ["folke/trouble.nvim"] = {
         TroubleTextInformation = { fg = c.blue_type },
         TroubleFile = { fg = c.yellow }, -- the source file that has error
         TroubleFoldIcon = { fg = c.blue_type }, -- fold icon color
@@ -530,9 +440,7 @@ M.highlight_groups = {
         TroubleText = { fg = c.white },
     },
 
-    ---Plugin: [nvim-code-action-menu](https://github.com/weilbith/nvim-code-action-menu)
-    plugin_nvim_code_action_menu = {
-
+    ["weilbith/nvim-code-action-menu"] = {
         CodeActionMenuWarningMessageText = { fg = c.orange_wr },
         CodeActionMenuWarningMessageBorder = { fg = c.red_key_w },
         CodeActionMenuMenuIndex = { fg = c.blue_type },
@@ -562,19 +470,7 @@ M.highlight_groups = {
     --   background 2        StatusLine
     -----------------------------------------
 
-    plugin_cmake = {
-        cmakeCommand = { fg = c.white },
-        cmakeArguments = { fg = c.white },
-        cmakeKWvariable_watch = { fg = c.white },
-        cmakeKWproject = { fg = c.pink },
-        cmakeGeneratorExpressions = { fg = c.pink },
-        cmakeVariable = { fg = c.white },
-        cmakeKWuse_mangled_mesa = { fg = c.fg, italic=true },
-    },
-
-    ---Plugin: [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-    plugin_treesitter = {
-
+    ["nvim-treesitter/nvim-treesitter"] = {
         TSAnnotation = { fg = c.yellow },
         TSAttribute = { fg = c.white },
         TSBoolean = { fg = c.orange, italic = cfg.italic.booleans },
@@ -586,8 +482,8 @@ M.highlight_groups = {
         TSConstMacro = { fg = c.blue_type },
         TSConstant = { fg = c.pink },
         TSConstructor = { fg = c.white },
-        TSEmphasis = { italic=true },
-        TSError = { fg = c.red_err, bg = c.bg, bold=true },
+        TSEmphasis = { italic = true },
+        TSError = { fg = c.red_err, bg = c.bg, bold = true },
         TSException = { fg = c.red_key_w },
         TSField = { fg = c.white },
         TSFloat = { fg = c.orange },
@@ -623,13 +519,13 @@ M.highlight_groups = {
         TSTag = { fg = c.red_key_w },
         TSTagDelimiter = { fg = c.gray_punc },
         TSText = { fg = c.fg },
-        TSTitle = { fg = c.white, bold=true },
+        TSTitle = { fg = c.white, bold = true },
         TSType = { fg = c.blue_type },
         TSTypeBuiltin = { fg = c.blue_type },
         TSTodo = { fg = c.orange },
         TSTypeQualifier = { fg = c.red_key_w },
-        TSURI = { fg = c.yellow, underline=true },
-        TSUnderline = { underline=true },
+        TSURI = { fg = c.yellow, underline = true },
+        TSUnderline = { underline = true },
         TSVariable = { fg = c.white, italic = cfg.italic.variables },
         TSVariableBuiltin = { fg = c.pink, italic = cfg.italic.variables },
         TSDefine = { fg = c.red_key_w },
@@ -637,4 +533,3 @@ M.highlight_groups = {
 }
 
 return M
-
